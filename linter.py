@@ -16,12 +16,15 @@
 from SublimeLinter.lint import Linter, util
 
 
-class GLSLLint(Linter):
+class GlslangValidator(Linter):
 
     """Provides an interface to glslangValidator."""
 
-    syntax = ('glsl', 'essl')
     cmd = ('glslangValidator', '@')
+    multiline = False
+    defaults = {
+        'selector': 'source.glsl, source.essl'
+    }
     regex = (r'^ERROR:\s.*:(?P<line>\d+):\s\'(?P<near>.*)\'\s:\s+(?P<message>.+)')
     error_stream = util.STREAM_BOTH
     tempfile_suffix = '-'
